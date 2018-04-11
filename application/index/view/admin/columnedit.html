@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="__STYLE__/admin/plugins/layui/css/layui.css?2" media="all"/>
+    <link rel="stylesheet" href="__STYLE__/admin/css/main.css"/>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="admin-main">
+    {if condition="$opt eq 'modify' "}
+    <table class="layui-table">
+        <colgroup>
+            <col width="150">
+            <col width="200">
+            <col width="200">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>父级栏目名称</th>
+            <th>栏目名称</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <form class="layui-form layui-form-pane" action="/admin/columnsmanager" method="post">
+                <td>{$cid}</td>
+                <td>
+                    <div class="layui-form">
+                        <div class="layui-form-item">
+                            <div  class="layui-input-inline">
+                                <select  name="super_name" lay-verify="required">
+                                    {volist name='supers' id='list'}
+                                    {if condition="$super_name eq $list.super_name "}
+                                    <option value="{$list.super_name}" selected>{$list.super_name}</option>
+                                    {else/}
+                                    <option value="{$list.super_name}">{$list.super_name}</option>
+                                    {/if}
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="layui-input-inline">
+                        <input type="text" style="text-align: center;" name="col_name" required lay-verify="required"
+                               placeholder="{$col_name}"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </td>
+
+                <td>
+                    <input type="text" hidden name="cid" value="{$cid}">
+                    <button type="submit" name="opt" value="modify" class="layui-btn"><i
+                            class="layui-icon">&#xe618;</i></button>
+            </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    {else/}
+
+    <fieldset class="layui-elem-field">
+        <legend>添加新栏目</legend>
+        <div class="layui-field-box">
+            <form class="layui-form" action="/admin/columnsmanager" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">父栏目名称:</label>
+                    <div id="newmod">
+                    <div id="mod" class="layui-input-inline">
+                        <select name="super_name" lay-verify="required">
+                            {volist name='supers' id='list'}
+                            <option value="{$list.super_name}">{$list.super_name}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                </div>
+                    <div class="layui-form-item">
+                    <label  class="layui-form-label"></label>
+                    <button style="margin-top: 5px;width: 190px; " type="button" id="btn_mode" class="layui-btn">
+                        <i id="set_icon" class="layui-icon">&#xe608;</i>
+                        <span id='modi_label'>添加新的父级栏目</span>
+                    </button>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">子栏目名称:</label>
+                    <div class="layui-input-inline">
+                        <input  type="text" name="col_name" required lay-verify="required" placeholder="请输入栏目标题"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <button style="margin:15px 160px" type="submit" name="opt" value="add" class="layui-btn"><i
+                        class="layui-icon">&#xe618;</i> 提交
+                </button>
+            </form>
+        </div>
+    </fieldset>
+
+    {/if}
+</div>
+
+{include file="public/layui" /}
+<script>
+    var btnmode=document.getElementById('btn_mode');
+    var mode=document.getElementById('mod');
+    var newMode=document.getElementById('newmod');
+    var nDiv = document.createElement('div');
+    var nLabel=document.getElementById('modi_label');
+    var icon=document.getElementById('set_icon');
+    var flag=true;
+
+    btnmode.onclick=function(){
+        if(flag==true){
+            mode.parentElement.removeChild(mode);
+            nDiv.id="ndiv";
+            nDiv.className="layui-input-inline";
+            nDiv.innerHTML="\<input type=\"text\" name=\"super_name\" placeholder=\"请输入栏目标题\" autocomplete=\"off\" class=\"layui-input\">";
+            newMode.appendChild(nDiv);
+            nLabel.innerText="放弃添加父级栏目";
+            icon.innerHTML="&#x1006;";
+            flag=false;
+        }else{
+            nDiv.parentElement.removeChild(nDiv);
+            newMode.appendChild(mode);
+            nLabel.innerText="添加新的父级栏目";
+            icon.innerHTML="&#xe608;";
+            flag=true;
+        }
+    }
+</script>
+</body>
+
+</html>

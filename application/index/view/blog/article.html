@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0,   minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>文章</title>
+    {include file="public/public_style" /}
+
+
+    <style type="text/css">
+        body {
+            background: url("__STYLE__/index/images/bg-yellow.png") repeat;
+        }
+
+        .page {
+
+            -webkit-box-shadow: 0 0 10px rgba(88, 88, 88, 0.8);
+            -moz-box-shadow: 0 0 10px rgba(88, 88, 88, 0.8);
+            box-shadow: 0 0 10px rgba(88, 88, 88, 0.8);
+            background: white;
+        }
+
+        .breadcrumb {
+            background-color: #d5d5d5;
+        }
+
+        .page p {
+            margin:0px 10px 0px 10px;
+            text-indent: 0em;
+            line-height: 1.55em;
+            font-size: 16px;
+            padding: 10px;
+        }
+
+        .input-group input {
+            display: block;
+        }
+
+        .col-md-9 p img {
+
+            width: 90%;
+
+        }
+
+
+        ::-webkit-scrollbar {
+            width: 14px;
+            height: 14px;
+        }
+
+        ::-webkit-scrollbar-track,
+        ::-webkit-scrollbar-thumb {
+            border-radius: 999px;
+            border: 5px solid transparent;
+        }
+
+        ::-webkit-scrollbar-track {
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, .2) inset;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            min-height: 20px;
+            background-clip: content-box;
+            box-shadow: 0 0 0 5px rgba(0, 0, 0, .2) inset;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+    </style>
+
+
+</head>
+<body>
+
+{include file="public/index_nav" /}
+
+<div class="container clearfix" style=" margin-top: 100px">
+    <div class="row">
+        <div class="col-xs-14 col-md-9 " id="p-col" style="margin-top: 20px;">
+            <div class="page">
+                <br><br>
+                <ol class="breadcrumb">
+
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/blog">博客</a></li>
+                    <li><a href="/blog/index/sn/{$sid}">{$super_name}</a></li>
+                    <li>{$columns_name}</li>
+                    <li class="active">文章</li>
+                </ol>
+                <h2 class="text-center">{$title}</h2><br>
+                <span style="margin-left: 20px">{$date}</span>
+                <span class="pull-right" style="margin-right: 20px;color: #019EFF"><strong>{$author}</strong></span>
+                <br><br>
+                {$content}
+                <h5 class="text-center" style="color: #00d0ff;margin-top: 100px" >转载需要注明饭科技</h5>
+
+
+
+                <div class="comment" style="width: 100%;background-color: white;margin-top: 30px">
+                    <h3 style="border-bottom: 3px solid #858585;background-color: #fff;padding: 5px 5px 10px 8px;margin: 0px">
+                        评论</h3>
+                    <div class="answer" style="padding:15px;">
+
+                        <form action="/comment/addcomment" method="post">
+                            <textarea name="content" cols="30" rows="10" style="resize:none;width: 100%;height: 100px;padding: 10px"></textarea>
+                            <input hidden type="text" name="aid" value="{$aid}">
+                            <button class="btn btn-primary pull-right" type="submit" style="margin-top: 15px">评论</button>
+                            <button class="btn btn-primary pull-right" type="reset" style="margin-right: 30px;margin-top: 15px">重置</button>
+                        </form>
+                    </div>
+
+                    <h3 style="border-bottom: 3px solid #858585;padding: 50px 5px 10px 8px;background-color: #fff;">最新评论</h3>
+
+                    <!--评论区-->
+                    <div class="reply" id="div_reply">
+
+
+                        <!--循环-->
+                        {volist name="comment" id="list" }
+
+                        <div>
+                            <span><img src="{$list.icon}" alt="" style="width: 50px;height: 50px;border-radius: 50%;margin: 15px 15px 0px 15px;">&nbsp;</span>
+                            <span class="nick_name">{$list.nick_name}</span>&nbsp;
+                            <time>{$list.date|date="Y-m-d H:i:s",###}</time>
+                              
+                            <span class="pull-right" style="height: 65px;line-height: 62px;text-align: center;margin-right:15px; ">#{$list.level}</span>
+                            <span hidden class="from">{$list.uid}</span>
+                            <p style="margin-left: 80px">
+                                {if condition="$list.from_level neq 0"}
+                                回复&nbsp;{$list.from_level}#:
+                                {/if}
+                                {$list.content}</p>
+                           
+                            <a class="replys" style="cursor: pointer;float: right;margin-right: 30px">回复</a>
+                            <hr style="margin-top: 35px">
+                        </div>
+                        {/volist}
+                        <!--循环-->
+
+            
+                    </div>
+                    <p id="morereply" style="cursor: pointer;text-align: center;color: #2e4139;"><i class="glyphicon glyphicon-arrow-down"></i>查看更多回复~</p>
+                </div>
+       
+                <div class="modal fade" id="myModalreply" tabindex="-1" style="margin-top: 200px">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+
+                                        <h5>回复<span class="replyer"></span>的评论</h5>
+                                        <form action="/comment/addcomment" method="post">
+                                            <textarea name="content" cols="30" rows="10" style="resize:none;width: 100%;height: 100px;padding: 10px"></textarea>
+                                            <input type="text" hidden value="" id="uid" name="from_uid">
+                                            <input type="text" hidden value="" id="from_level" name="from_level">
+                                            <input type="text" hidden value="{$aid}" name="aid">
+                                            <button class="btn btn-primary pull-right" type="submit" style="margin-top: 15px">评论</button>
+                                            <button class="btn btn-primary pull-right" type="reset" style="margin-right: 30px;margin-top: 15px">重置</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {include file="public/right_weiget" /}
+    </div>
+
+
+
+</div>
+
+{include file="public/index_footer" /}
+
+<script>
+    (function ($) {
+        $.extend({
+            myTime: {
+                /**
+                 * 当前时间戳
+                 * @return <int>    unix时间戳(秒)
+                 */
+                CurTime: function () {
+                    return Date.parse(new Date()) / 1000;
+                },
+                /**
+                 * 日期 转换为 Unix时间戳
+                 * @param <string> 2014-01-01 20:20:20 日期格式
+                 * @return <int>    unix时间戳(秒)
+                 */
+                DateToUnix: function (string) {
+                    var f = string.split(' ', 2);
+                    var d = (f[0] ? f[0] : '').split('-', 3);
+                    var t = (f[1] ? f[1] : '').split(':', 3);
+                    return (new Date(
+                            parseInt(d[0], 10) || null,
+                            (parseInt(d[1], 10) || 1) - 1,
+                            parseInt(d[2], 10) || null,
+                            parseInt(t[0], 10) || null,
+                            parseInt(t[1], 10) || null,
+                            parseInt(t[2], 10) || null
+                        )).getTime() / 1000;
+                },
+                /**
+                 * 时间戳转换日期
+                 * @param <int> unixTime  待时间戳(秒)
+                 * @param <bool> isFull  返回完整时间(Y-m-d 或者 Y-m-d H:i:s)
+                 * @param <int> timeZone  时区
+                 */
+                UnixToDate: function (unixTime, isFull, timeZone) {
+                    if (typeof (timeZone) == 'number') {
+                        unixTime = parseInt(unixTime) + parseInt(timeZone) * 60 * 60;
+                    }
+                    var time = new Date(unixTime * 1000);
+                    var ymdhis = "";
+                    var temp = ''
+                    ymdhis += time.getUTCFullYear() + "-";
+                    if ((time.getUTCMonth() + 1) < 10) {
+                        temp = "0" + (time.getUTCMonth() + 1);
+
+                    } else {
+                        temp = (time.getUTCMonth() + 1);
+                    }
+                    ymdhis += temp + "-";
+                    ymdhis += time.getUTCDate();
+                    if (isFull === true) {
+                        var h;
+                        var m;
+                        var s;
+
+                        if ((time.getUTCHours()) < 10) {
+                            h = "0" + time.getUTCHours();
+                        } else {
+                            h = time.getUTCHours();
+                        }
+                        if (time.getUTCMinutes() < 10) {
+                            m = "0" + time.getUTCMinutes();
+                        } else {
+                            m = time.getUTCMinutes();
+                        }
+                        if (time.getUTCSeconds() < 10) {
+                            s = "0" + time.getUTCSeconds();
+                        } else {
+                            s = time.getUTCSeconds();
+                        }
+                        ymdhis += " " + h + ":";
+                        ymdhis += m + ":";
+                        ymdhis += s;
+                    }
+                    return ymdhis;
+                }
+            }
+        });
+    })(jQuery);
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var ajaxobj = new XMLHttpRequest();
+        var moreClickCount = 1;
+        $("#morereply").click(function () {
+            moreClickCount++;
+            ajaxobj.open('get', '/comment/getcomment?aid={$aid}&count=' + moreClickCount, true);
+            ajaxobj.send();
+//          ajax监听
+            ajaxobj.onreadystatechange = function () {
+                if (ajaxobj.readyState == 4 && ajaxobj.status == 200) {
+                    var jsonData = $.parseJSON(ajaxobj.responseText);
+                    if ($.isEmptyObject(jsonData)) {
+                        $("#morereply").text("没有更多的回复了╮（﹀＿﹀）╭")
+                    }
+                    $.each(jsonData, function (index, obj) {
+                        var from_level = '';
+
+                        var date = $.myTime.UnixToDate(obj.date, true, 8);
+                        if (obj.from_level != 0) {
+                            from_level = "回复 " + obj.from_level + "#:";
+                        }
+
+
+                        $("#div_reply").append(
+                            "\<div\>" +
+                            "\<span\>\<img src=\"" + obj.icon + "\" alt=\"\" style=\"width: 50px;height: 50px;border-radius: 50%;margin: 15px 15px 0px 15px;\">&nbsp;\</span\>" +
+                            "\<span class='nick_name' \>" + obj.nick_name + "\</span\>&nbsp;" +
+                            "\<time\>" + date + "\</time\>" +
+                            "\<span class=\"pull-right\" style=\"height: 65px;line-height: 62px;text-align: center;margin-right:15px; \"\>#" + obj.level + "\</span\>" +
+                            "\<p style=\"margin-left: 80px\"\>" + from_level + obj.content + "\</p\>" +
+                            
+                            "\<a class=\"replys\" style=\"cursor: pointer;float: right;margin-right: 30px\"\>回复\</a\>" +
+                            "\<hr style=\"margin-top: 35px\"\>"
+                            + "\</div\>"
+                        );
+                    });
+                    $('.replys').click(function () {
+                        $('#myModalreply').modal('show');
+                        $('.replyer').text($(this).siblings('.nick_name').text());
+                        $('#from_level').attr('value',$(this).siblings('.pull-right').text().replace(/[\#\*\/]/g,""));
+                        $('#uid').attr('value',$(this).siblings('.from').text().replace(/[\#\*\/]/g,""));
+                    });
+
+                }
+            };
+       
+        });
+
+
+    });
+</script>
+</body>
+</html>

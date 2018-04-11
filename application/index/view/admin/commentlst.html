@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="__STYLE__/admin/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="__STYLE__/admin/css/main.css"/>
+</head>
+
+<body>
+<div class="admin-main">
+    <fieldset class="layui-elem-field">
+        <legend>文章列表</legend>
+        <form action="editor" method="post">
+            <button style="margin-left:27px;margin-top: 10px" class="layui-btn" type="button" onclick="window.open('/admin/lst','_self')">
+                <i class="layui-icon">&#xe603;</i> 返回
+            </button>
+        </form>
+        <table style="margin-left:2%;width:96%" class="layui-table">
+            <colgroup>
+                <col width="10%">
+                <col width="15%">
+                <col width="15%">
+                <col width="10%">
+                <col width="10%">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>CMID</th>
+                <th>被评论用户</th>
+                <th>评论用户</th>
+                <th>内容</th>
+                <th>回复时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name='cmt' id='list'}
+            <form class="layui-form" action="" method="post">
+                <div class="layui-form-item">
+                    <tr>
+                        <td>{$list.cmid}</td>
+                        <td>{$list.from_nick_name}</td>
+                        <td>{$list.nick_name}</td>
+                        <td>{$list.content}</td>
+                        <td>{$list.date|date="y-m-d H:i:s",###}</td>
+                        <td style="text-align: left;">
+                            <input type="text" value="{$list.cmid}" name="cmid" hidden>
+                            <input type="text" value="{$list.aid}" name="aid" hidden>
+                            <button type="submit" name="type" value="del" formaction="/comment/delcomment" formmethod="post" class="layui-btn"><i class="layui-icon"></i></button>
+                        </td>
+                    </tr>
+                </div>
+            </form>
+            {/volist}
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+</body>
+
+</html>

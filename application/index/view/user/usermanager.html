@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="__STYLE__/admin/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="__STYLE__/admin/css/main.css"/>
+</head>
+
+<body>
+<div class="admin-main">
+    <fieldset class="layui-elem-field">
+        <legend>用户管理</legend>
+
+
+        <table style="margin-left:2%;width:96%" class="layui-table">
+            <colgroup>
+                <col width="10%">
+                <col width="15%">
+                <col width="230px">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>用户组</th>
+                <th style="text-align:left;">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name='user' id='list'}
+            {if condition="$list.Id neq 0"}
+                <tr>
+                    <form class="layui-form" action="/user/usermanager" method="post">
+
+                        <td>{$list.Id}</td>
+                        <td>{$list.user_name}</td>
+                        <td id="auth_{$list.Id}">
+                            {switch name="$list.auth"}
+                            {case value='0'}管理员{/case}
+                            {case value='1'}普通用户{/case}
+                            {case value='2'}作者{/case}
+                            {case value='3'}编辑{/case}
+                            {defalut /}null
+                            {/switch}
+                        </td>
+                        <td style="text-align:left;">
+                            <input type="text" id="set_auth_{$list.Id}" name="auth" value="" hidden>
+                            <input type="text" name="uid" hidden value="{$list.Id}">
+                            <button type="submit" name="method" value="modify" id="btn_modify_auth_{$list.Id}"
+                                    class="layui-btn layui-btn-disabled"><i class="layui-icon">&#x1005;</i></button>
+                            <button type="submit" name="method" value="del" class="layui-btn"><i
+                                    class="layui-icon"></i></button>
+                    </td>
+                    </form>
+                </tr>
+            {/if}
+            {/volist}
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<script type="text/javascript" src="__STYLE__/admin/plugins/layui/layui.js"></script>
+<script>
+    layui.use(['jquery', 'layer', 'form'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer,
+            form = layui.form();
+        if ('{$from}' == 'index') {
+            layer.msg('欢迎使用后台管理');
+        }
+
+        $("td[id^=auth]").dblclick(function (e) {
+            var v_id = "#" + $(this).attr('id');
+            var g_id = $(this).attr('id');
+            var text2 =
+                "\<div class=\"layui-form\"\>\<div class=\"layui-form-item\"\>\<div class=\"layui-input-inline\"  style=\"width:130px;\" \>\<select lay-filter='"+g_id+"' lay-verify=\"required\"\>\<option value=''\>\</option\> \<option value='0'>管理员\</option\> \<option value='1'>普通用户\</option\> \<option value='2'>作者\</option\> \<option value='3'>编辑\</option\> \</select\> \</div\> \<button type=\"button\" id=\"btn_cancel_" + g_id + "\" class=\"layui-btn\"\>\<i class=\"layui-icon\">&#x1006;\</i>\</button>\</div\>\</div\>";
+
+            var content = $(v_id).html();
+            $(v_id).empty();
+            $(v_id).append(text2);
+
+
+
+
+            $("#btn_modify_" + g_id).removeClass("layui-btn-disabled");
+            $("button[id^=btn_cancel_auth]").click(function () {
+                $("#btn_modify_" + g_id).addClass("layui-btn-disabled");
+                $(v_id).empty();
+                $(v_id).html(content);
+            });
+
+            form.render();
+
+            form.on('select('+g_id+')',function (data) {
+                $("#set_"+g_id).attr('value',data.value);
+            });
+        });
+
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<script>
+    var navs = [
+        {
+            "title": "用户",
+            "icon": "&#xe613;",
+            "href": "#",
+            "spread": true,
+            "children": [{
+                "title": "个人信息",
+                "icon": "fa-user",
+                "href": "/user/profile",
+            }, {
+                "title": "修改密码",
+                "icon": "fa-lock",
+                "href": "/user/modifypassword"
+            },
+                {if condition="$Think.session.auth eq '0'"}
+                {
+                "title": "用户管理",
+                "icon": "fa-users",
+                "href": "/user/usermanager",
+                }
+                {/if}
+            ],
+        },
+        {
+            "title": "文章",
+            "icon": "&#xe613;",
+            "href": "#",
+            "spread": true,
+            "children": [{
+                "title": "写文章",
+                "icon": "fa-edit",
+                "href": "/admin/editor",
+            },
+                {if condition="$Think.session.auth eq '0'"}
+                {
+                "title": "文章管理",
+                "icon": "fa-book",
+                "href": "/admin/lst"
+                },
+//                {
+//                    "title": "评论管理",
+//                    "icon": "fa-comments",
+//                    "href": "/admin/commentlst"
+//                }
+                {/if}
+            ],
+        },
+
+        {if condition="$Think.session.auth eq '0' "}
+        {
+            "title":"栏目管理",
+            "icon":"&#xe638",
+            "href":"#",
+            "spread": true,
+            "children": [{
+                "title": "添加栏目",
+                "icon": "fa-plus-square",
+                "href": "/admin/columnedit",
+            }, {
+                "title": "编辑栏目",
+                "icon": "fa-edit",
+                "href": "/admin/columnsmanager",
+            }]
+        },
+        {/if}
+    ];
+</script>

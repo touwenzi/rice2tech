@@ -1,0 +1,94 @@
+<div class="col-xs-4 col-md-3 display " style="margin-top: 20px" id="passage">
+
+    <div class="introduction text-center">
+        <div class="panel">
+
+            <div class="panel-body">
+                <img src="{$icon|default='/static/profile/icon/default.jpg'}" alt="" style="border-radius: 50%;border: 4px wheat solid"  >
+                <h3>欢迎来到<br>{$blog_title|default='饭科技'}</h3>
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="tab" role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist" style="margin-top:0px;" id="docTabs">
+
+            <li role="presentation" class="active" id="tab1"><a href="#Section_new" aria-controls="home" role="tab" data-toggle="tab"> 最新</a>
+            <li role="presentation" id="tab2"><a href="#Section_hot" aria-controls="hot" role="tab" data-toggle="tab">热门</a>
+            <li role="presentation" id="tab3"><a href="#Section_history" aria-controls="history" role="tab" data-toggle="tab">历史</a>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content tab_bg">
+            <div role="tabpanel" class="tab-pane active " id="Section_new">
+                <p><a href="">方程式组织机密文件泄露了多个Windows零日漏洞</a></p>
+                <p><a href="">Windows 10 Cloud最终定位原来是教育用途</a></p>
+                <p><a href="">Padavan华硕固件端口映射和动态DNS设置方法</a></p>
+                <p><a href="">利用花生壳免费动态解析开启内网和外网远程唤醒</a></p>
+            </div>
+            <div role="tabpanel" class="tab-pane " id="Section_hot">
+                <p><a href="">Windows 10 Cloud最终定位原来是教育用途</a></p>
+                <p><a href="">方程式组织机密文件泄露了多个Windows零日漏洞</a></p>
+                <p><a href="">Padavan华硕固件端口映射和动态DNS设置方法</a></p>
+                <p><a href="">利用花生壳免费动态解析开启内网和外网远程唤醒</a></p>
+            </div>
+            <div role="tabpanel" class="tab-pane " id="Section_history">
+                <p><a href="">Windows 10 Cloud最终定位原来是教育用途</a></p>
+                <p><a href="">Padavan华硕固件端口映射和动态DNS设置方法</a></p>
+                <p><a href="">方程式组织机密文件泄露了多个Windows零日漏洞</a></p>
+                <p><a href="">利用花生壳免费动态解析开启内网和外网远程唤醒</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="labels">
+        <div class="panel">
+
+            <h4>标签</h4>
+
+            <div id="tags" class="panel-body">
+                <span class="btn btn-success btn-sm">css</span>
+                <span class="btn btn-success btn-sm">html5</span>
+                <span class="btn btn-success btn-sm">动画</span>
+                <span class="btn btn-success btn-sm">vue.js</span>
+                <span class="btn btn-success btn-sm">ajax</span>
+                <span class="btn btn-success btn-sm">前端</span>
+                <span class="btn btn-success btn-sm">后端</span>
+                <span class="btn btn-success btn-sm">Linux</span>
+                <span class="btn btn-success btn-sm">mysql</span>
+                <span class="btn btn-success btn-sm">设计</span>
+                <span class="btn btn-success btn-sm">安全</span>
+                <span class="btn btn-success btn-sm">数据库</span>
+                <span class="btn btn-success btn-sm">node.js</span>
+                <span class="btn btn-success btn-sm">windows</span>
+                <span class="btn btn-success btn-sm">android</span>
+                <span class="btn btn-success btn-sm">javascript</span>
+
+
+            </div>
+            <script>
+                $(document).ready(function () {
+                    $("#tags span").click(function () {
+                        window.open('https://www.baidu.com/s?ie=UTF-8&wd='+$(this).text(),'_blank');
+                    })
+                })
+            </script>
+        </div>
+
+    </div>
+    <div class="introduce">
+        <div class="panel-heading text-center"><h4 class="text-left"><span class="glyphicon glyphicon-user" hidden="true"></span>{$nick_name|default="未登录"}</h4>
+            <img src="{$icon|default='/static/profile/icon/default.jpg'}" alt="" style="height: 100px;width: 100px;border-radius: 50%;border: 4px solid wheat" class="text-center">
+        </div>
+        <div class="panel-body">
+            <p>{$info|default='<p style="text-align: center;">您还未<a id="login1" style="cursor: pointer;">登录</a></p>'}</p>
+        </div>
+
+    </div>
+    <br><br><br> <br><br><br> <br><br><br>
+</div>
+

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>文章编辑</title>
+    <link rel="stylesheet" href="__STYLE__/admin/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="__STYLE__/admin/css/main.css"/>
+    <style>
+        @media screen and (max-width: 450px) {
+            .layui-form-item .layui-input-inline {
+                margin-left: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="admin-main">
+    <fieldset class="layui-elem-field">
+        <legend>文章编辑</legend>
+        <div class="layui-field-box">
+            <form class="layui-form" action="/admin/articleOpt" method="post">
+
+                <div class="layui-form-item">
+                    <!--<label class="layui-form-label">文章标题:</label>-->
+                    <div class="layui-input-inline">
+                        <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                               autocomplete="off" class="layui-input" value="{$title|default=''}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <!--<label class="layui-form-label">作者:</label>-->
+                    <div class="layui-input-inline">
+                        <input type="text" name="author" disabled required lay-verify="required"
+                               value="{$author|default=''}" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <!--<label class="layui-form-label">栏目:</label>-->
+                    <div class="layui-input-inline">
+                        <select name="columns" lay-verify="required">
+                            <option value="">请选择栏目</option>
+                            {volist name='super' id='list'}
+                            <optgroup label="{$list.super_name}">
+                                {volist name='columns' id='col'}
+                                {if condition="$col.super_name eq $list.super_name "}
+                                <option {if condition="$col.col_name eq $column" } selected {/if} value="{$col.col_name}">{$col.col_name}</option>
+                                {/if}
+                                {/volist}
+                            </optgroup>
+                            {/volist}
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div style="width:190px;" class="layui-input-inline">
+                        <input type="file" name="title-pic" lay-title=请上传文章标题图片"
+                               class="layui-upload-file">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <img src="{$title_pic|default='/static/article/pic/default.jpg'}" width="190px" id="title_img">
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item layui-form-text">
+                    <!--<label class="layui-form-label">文章简介:</label>/-->
+                    <div style="margin-left:0px;" class="layui-input-block">
+                        <textarea name="brief" style="resize:none" placeholder="请输入简介" class="layui-textarea">{$brief|default=""}</textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <!--<label class="layui-form-label">正文:</label>-->
+                    <div style="margin-left:0px;" class="layui-input-block">
+                        <textarea id="editor" name="content" style="display: none;">{$content|default=''}</textarea>
+                    </div>
+                </div>
+                <input hidden type="text" value="{$aid}" name="aid">
+                <input hidden type="text" value="{$title_pic|default='/static/article/pic/default.jpg'}"
+                       name="title_pic" id="title_pic">
+                <div class="layui-form-item">
+
+                    <button class="layui-btn" type="submit" name="type" value="{$type}">
+                        {if condition="$type eq 'add'"}
+                        <i class="layui-icon">&#xe608;</i>
+                        {if condition="$Think.session.auth eq '0'"}
+                        添加文章
+
+                        {else/}
+                        投稿
+                        {/if}
+                        {else/}
+                        <i class="layui-icon">&#xe618;</i>
+                        {if condition="$status eq 0"}
+                        通过审核
+                        {else/}
+                        修改文章
+                        {/if}
+                        {/if}
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </fieldset>
+</div>
+</body>
+<script src="__STYLE__/admin/plugins/layui/layui.js"></script>
+<script>
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer,
+            form = layui.form();
+        var $ = layui.jquery;
+
+        layui.use('layedit', function () {
+            var layedit = layui.layedit;
+            layedit.set({
+                uploadImage: {
+                    url: '/admin/uploadpic', //接口url
+                    type: '' //默认post
+                }
+            });
+            //注意：layedit.set 一定要放在 build 前面，否则配置全局接口将无效。
+            layedit.build('editor', {
+                height: 500
+            }); //建立编辑器
+        });
+        layui.use('upload', function () {
+            layui.upload({
+                url: "/admin/uploadtitlepic"
+                , before: function (input) {
+                    //返回的参数item，即为当前的input DOM对象
+                    console.log('文件上传中');
+                }
+                , method: 'post' //上传接口的http类型
+                , success: function (res) {
+                    console.log('上传完毕');
+                    console.log(res)
+                    $("#title_pic").attr("value", res.serverPath);
+                    $("#title_img").attr("src", res.src);
+                }
+            });
+        });
+    });
+</script>
+
+</html>

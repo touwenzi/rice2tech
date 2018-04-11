@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <link rel="stylesheet" href="__STYLE__/index/css/jquery.fullPage.css">
+
+    {include file="public/public_style" /}
+    <link rel="stylesheet" href="__STYLE__/index/css/index.css">
+</head>
+<body>
+
+{include file="public/index_nav" /}
+
+<div id="dowebok"  >
+    <div class="section section1  " >
+        <div class="word animated bounceInDown">
+            <h1 id="fade">学无止境</h1>
+            <p>繁华的都市中，这里是你温馨的港湾，放下一天的工作，沏上一杯淡茶，在这里可以驱走你一天的劳累。</p>
+        </div>
+    </div>
+    <div class="section section2 img-responsive">
+        <div class="life">
+            <h1 style="visibility: hidden" class="animated " id="life">轻生活</h1><br><br>
+            <p id="first-word" >生命中有许多你不想做却不能不做的事，这就是责任。</p><br>
+            <p id="second-word">生命中有许多你想做却不能做的事，这就是命运。</p>
+        </div>
+    </div>
+    <div class="section section3 img-responsive" >
+        <div class="design">
+            <h1>设计与艺术</h1><br>
+            <p>好的艺术会带给人们美的感受，灵感离不开细心观察，灵感源于勤奋</p>
+        </div>
+    </div>
+    <div class="section section4 img-responsive">
+        <div class="share">
+            <h1>模板分享</h1>
+            <p>分享优秀的网站设计，网页源码，共同进步，互相学习</p><br><br><br><br><br><br><br>
+            <a class="btn-primary btn btn-lg" href="share.html">查看更多</a>
+        </div>
+    </div>
+</div>
+
+<script src="__STYLE__/index/js/jquery.fullPage.min.js"></script>
+<script src="__STYLE__/index/js/jquery.easing.min.js"></script>
+
+<script>
+    $("#dowebok").click(function(){
+        removeClass("fp-tableCell");
+    });
+    $(function(){
+        $('#dowebok').fullpage({
+            'navigation': true,
+            afterLoad: function(anchorLink, index){
+                if(index == 2){
+                    document.getElementById('first-word').style.visibility='visible';
+                    document.getElementById('second-word').style.visibility='visible';
+                    document.getElementById('life').style.visibility='visible';
+                    $('#first-word').addClass('first-word');
+                    $('#second-word').addClass('second-word');
+                    $('#life').addClass('bounceInRight');
+
+                }
+
+
+            },
+            onLeave: function(index, direction){
+                document.getElementById('first-word').style.visibility='hidden';
+                document.getElementById('second-word').style.visibility='hidden';
+                document.getElementById('life').style.visibility='hidden';
+                $('#first-word').removeClass('first-word');
+                $('#second-word').removeClass('second-word');
+                $('#life').removeClass('bounceInRight');
+            }
+
+        });
+
+    });
+</script>
+</body>
+</html>

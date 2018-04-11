@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="__STYLE__/admin/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="__STYLE__/admin/css/main.css"/>
+</head>
+
+<body>
+<div class="admin-main">
+    <fieldset class="layui-elem-field">
+        <legend>文章列表</legend>
+        <form action="editor" method="post">
+            <button style="margin-left:27px;margin-top: 10px" class="layui-btn" type="submit" name="method" value="add">
+                <i class="layui-icon">&#xe608;</i> 添加文章
+            </button>
+        </form>
+        <table style="margin-left:2%;width:96%" class="layui-table">
+            <colgroup>
+                <col width="10%">
+                <col width="15%">
+                <col width="15%">
+                <col width="10%">
+                <col width="10%">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>文章标题</th>
+                <th>所属栏目</th>
+                <th>作者</th>
+                <th>审核状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name='article' id='list'}
+            <form class="layui-form" action="/admin/editor" method="post">
+                <div class="layui-form-item">
+                    <tr>
+                        <td>{$list.aid}</td>
+                        <td>{$list.title}</td>
+                        <td>{$list.columns}</td>
+                        <td>{$list.author}</td>
+                        <td>
+                            {if condition="$list.status eq 1" }
+                            审核通过
+                            {elseif condition="$list.status eq 0" /}
+                            未审核
+                            {else /}
+                            未通过审核
+                            {/if}
+                        </td>
+                        <td style="text-align: left;">
+                            <input type="text" value="{$list.aid}" name="aid" hidden>
+                            <button type="submit" name="type" value="modify" class="layui-btn"><i class="layui-icon"></i></button>
+                            <button type="submit" name="type" value="comment" formaction="commentlst" formmethod="post" class="layui-btn"><i class="layui-icon">&#xe611;</i></button>
+                            <button type="submit" name="type" value="del" formaction="articleDel" formmethod="post" class="layui-btn"><i class="layui-icon"></i></button>
+                        </td>
+                    </tr>
+                </div>
+            </form>
+            {/volist}
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+</body>
+
+</html>

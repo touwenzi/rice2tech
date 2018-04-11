@@ -1,0 +1,62 @@
+<script type="text/javascript" src="__STYLE__/admin/plugins/layui/layui.js"></script>
+<script>
+    layui.use(['layer', 'form'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer
+            , form = layui.form();
+        if ('{$from}' == 'index') {
+            layer.msg('欢迎使用后台管理');
+        }
+        //表单验证
+        form.verify({
+            username: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (!new RegExp("/^[\w!@#$%\^&*()-=_+]{6,20}$/").test(value)) {
+                    return '用户名由6~20位的数字、字母或符号组成';
+                }
+                if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+                    return '用户名首尾不能出现下划线\'_\'';
+                }
+            },
+            pass: [
+                /^[\w!@#$%\^&*()-=_+]{8,20}$/, '密码必须8到20位，且不能出现空格'
+            ],
+
+            passr: function (value) {
+                //获取密码
+                var pwd = $("#newpwd").val();
+                if (!new RegExp(pwd).test(value)) {
+                    return '两次输入的密码不一致';
+                }
+            }
+
+        });
+
+    });
+    //日期选择类
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        var start = {
+            min: laydate.now(),
+            max: '2099-06-16 23:59:59',
+            istoday: false,
+            choose: function (datas) {
+                end.min = datas; //开始日选好后，重置结束日的最小日期
+                end.start = datas //将结束日的初始值设定为开始日
+            }
+        };
+
+        var end = {
+            min: laydate.now(),
+            max: '2099-06-16 23:59:59',
+            istoday: false,
+            choose: function (datas) {
+                start.max = datas; //结束日选好后，重置开始日的最大日期
+            }
+        };
+
+
+    });
+
+
+</script>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="__STYLE__/login/login.css?3">
+    <script type="text/javascript" src="__JS__/ueditor/ueditor.config.js?1"></script>
+    <script type="text/javascript" src="__JS__/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="__JS__/ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+<div class="publish">
+    <form action="articleOpt" method="post">
+        <span>标题</span><input type="text" name="title" class="text" value="{$title}"><br>
+        <br>
+        <label for="passage-name" style="padding-left:35px;">文章内容</label>
+        <textarea name="content" id="container"  class="textareas" rows="30" cols="10">{$content}</textarea><br>
+        {if condition="$auth eq '0' "}
+        <button class="button_pub">发布</button>
+        <input style="visibility: hidden" type="text" name="method" value="publish">
+        {else/}
+        <button class="button_pub">投稿</button>
+        <input style="visibility: hidden" type="text" name="method" value="contribute">
+        {/if}
+        <input style="visibility: hidden" type="text" name="aid" value="{$aid}">
+        <input style="visibility: hidden" type="text" name="type" value="{$type}">
+
+    </form>
+</div>
+
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+
+</script>
+</body>
+</html>

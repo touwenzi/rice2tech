@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+
+    {include file="public/public_style" /}
+    <link rel="stylesheet" href="__STYLE__/index/css/flat-ui.css">
+    <script src="__STYLE__/index/js/jquery-2.js"></script>
+    <script src="__STYLE__/index/js/bootstrap.js"></script>
+    <script src="__STYLE__/index/js/bootstrapValidator.js"></script>
+    <script src="__STYLE__/index/js/validate.js"></script>
+    <style>
+        .install{
+            -webkit-box-shadow:0 0 10px rgba(175, 175, 175, 0.8);
+            -moz-box-shadow:0 0 10px rgba(175, 175, 175, 0.8);
+            box-shadow:0 0 10px rgba(175, 175, 175, 0.8);
+            border-radius: 5px;
+        }
+        .has-feedback .form-control{
+          padding-right: 12px;
+        }
+    </style>
+
+</head>
+<body style="background-color: #f3f3f3">
+<div class="container" >
+    <h3 class="text-center">博客安装引导界面</h3>
+    <div class="install" style="margin: 20px auto;background-color: white;padding-left: 15px;padding-right: 15px;">
+        <label for="">请在下方填写您的数据库连接信息。如果您不确定，请联系您的服务提供商。</label>
+            <form action="/index/install" id="installForm" method="post" class="form-horizontal">
+                <div class="row form-group form-inline">
+                    <div class="col-md-2 ">
+                        <label for="">数据库用户名</label>
+                    </div>
+                    <div class="col-md-3 ">
+                        <input type="text" name="db_user" class="form-control">
+                    </div>
+                    <div class="col-md-7 "><label for="">数据库用户名</label></div>
+                </div>
+                <div class="row form-group form-inline">
+                    <div class="col-md-2 ">
+                        <label for="">数据库密码</label>
+                    </div>
+                    <div class="col-md-3 ">
+                        <input type="password"  name="db_pwd" class="form-control">
+                    </div>
+                    <div class="col-md-7 "><label for="">您的数据库密码</label></div>
+                </div>
+                <div class="row form-group form-inline">
+                    <div class="col-md-2 ">
+                        <label for="">数据库名</label>
+                    </div>
+                    <div class="col-md-3 ">
+                        <input type="text" name="db_name" class="form-control">
+                    </div>
+                    <div class="col-md-7 "><label for="">您在数据库创建的数据库名</label></div>
+                </div>
+                <div class="row form-group form-inline">
+                    <div class="col-md-2 ">
+                        <label for="">数据库主机</label>
+                    </div>
+                    <div class="col-md-3 ">
+                        <input type="text" name="db_hostname" class="form-control">
+                    </div>
+                    <div class="col-md-7 "><label for="">如果localhost不能用，您通常可以从网站服务提供商处得到正确的信息。</label></div>
+                </div>
+                <div class="row form-group form-inline">
+                    <div class="col-md-2 ">
+                        <label for="">表前缀</label>
+                    </div>
+                    <div class="col-md-3 ">
+                        <input type="text" name="prefix" class="form-control" value="wp_">
+                    </div>
+                    <div class="col-md-7 "><label for="">如果您希望在同一个数据库安装多个博客，请修改前缀。</label></div>
+                </div>
+                <div class="row form-group form-inline">
+                    <div class="col-md-2 ">
+                        <label for="">网站名称</label>
+                    </div>
+                    <div class="col-md-3 ">
+                        <input type="text" name="blog_title" class="form-control">
+                    </div>
+                    <div class="col-md-7 "><label for="">请输入您的网站名称。</label></div>
+                </div>
+                <div class="row form-group form-inline">
+                    <div class="col-md-2 ">
+                        <label for="">管理员用户</label>
+                    </div>
+                    <div class="col-md-3 ">
+                        <input type="text" name="uname" class="form-control">
+                    </div>
+                    <div class="col-md-7 "><label for="">注册管理员帐号</label></div>
+                </div>
+                <div class="row form-group form-inline">
+                    <div class="col-md-2 ">
+                        <label for="">管理员密码</label>
+                    </div>
+                    <div class="col-md-3 ">
+                        <input type="password" name="pwd" class="form-control">
+                    </div>
+                    <div class="col-md-7 "><label for="">设置管理员密码</label></div>
+                </div>
+                <div class="row form-group form-inline">
+                    <div class="col-md-2 ">
+                        <label for="">邮箱</label>
+                    </div>
+                    <div class="col-md-3 ">
+                        <input type="text" name="mail" class="form-control">
+                    </div>
+                    <div class="col-md-7 "><label for="">输入邮箱帐号</label></div>
+                </div>
+
+                <button class="btn btn-primary" type="submit"  id="install_submit">提交</button>
+                <button type="reset" class="btn-danger btn">重置</button>
+
+                <br><br>
+            </form>
+    </div>
+</div>
+<script>
+    $("#installForm").keydown(function(e){
+        var e = e || event,
+            keycode = e.which || e.keyCode;
+        if (keycode==13) {
+            $(".install_submit").trigger("click");
+        }
+    });
+</script>
+</body>
+</html>

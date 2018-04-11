@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+<p id="test_title">test</p>
+<p id="test_author">test</p>
+<div id="test_content">test</div>
+<button type="button" id="btn">按钮</button>
+</div>
+<script>
+    $(document).ready(function () {
+        var ajaxobj=new XMLHttpRequest();
+
+        $("#btn").click(function () {
+            ajaxobj.open('get','/blog/ajaxtest?aid=24',true);
+            ajaxobj.send();
+            ajaxobj.onreadystatechange = function () {
+                if (ajaxobj.readyState == 4 && ajaxobj.status == 200) {
+                   var json=$.parseJSON(ajaxobj.responseText);
+                   console.log(ajaxobj.responseText);
+                   $("#test_title").text(json['title']);
+                   $("#test_author").text(json['author']);
+                   $("#test_content").html(json['content']);
+                }
+            };
+        });
+
+    })
+</script>
+</body>
+</html>

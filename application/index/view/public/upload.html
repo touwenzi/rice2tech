@@ -1,0 +1,19 @@
+<script>
+    //上传类
+    layui.use('upload', function () {
+        layui.upload({
+            url: "{$jsonurl|default=''}"
+            , before: function (input) {
+                //返回的参数item，即为当前的input DOM对象
+                console.log('文件上传中');
+            }
+            , elem: "#{$elem|default=''}" //指定原始元素，默认直接查找class="layui-upload-file"
+            , method: 'post' //上传接口的http类型
+            , success: function (res) {
+                console.log('上传完毕');
+                console.log(res);
+                LAY_demo_upload.src = res.url;
+            }
+        });
+    });
+</script>

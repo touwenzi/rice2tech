@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <link rel="stylesheet" href="__STYLE__/admin/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="__STYLE__/admin/css/main.css"/>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+<div class="admin-main">
+    <fieldset class="layui-elem-field">
+        <legend>栏目管理</legend>
+        <div class="layui-field-box">
+            <form action="/admin/columnedit" method="post">
+                <button class="layui-btn" type="submit" name="opt" value="add">
+                    <i class="layui-icon">&#xe608;</i> 添加
+                </button>
+            </form>
+            <table class="layui-table">
+                <colgroup>
+                    <col width="10%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="50%">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>子栏目名称</th>
+                    <th>父栏目名称</th>
+                    <th style="text-align:left;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name='columns' id='list'}
+                <form class="layui-form layui-form-pane" action="" method="post">
+                    <tr>
+                        <td>{$list.cid}</td>
+                        <td>{$list.col_name}</td>
+                        <td>{$list.super_name}</td>
+                        <td style="text-align:left;">
+                            <input type="text" hidden name="cid" value="{$list.cid}">
+                            <input type="text" hidden name="col_name" value="{$list.col_name}">
+                            <input type="text" hidden name="super_name" value="{$list.super_name}">
+                            <button type="submit" name="opt" value="modify" formaction="/admin/columnedit"
+                                    formmethod="post"
+                                    class="layui-btn"><i class="layui-icon"></i></button>
+                            <button name="opt" value="del" type="submit" class="layui-btn"><i class="layui-icon"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </form>
+                {/volist}
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</div>
+{include file="public/layui" /}
+</body>
+
+</html>

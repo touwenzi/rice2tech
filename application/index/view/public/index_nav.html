@@ -1,0 +1,275 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">{$blog_title|default='饭科技'}</a>
+        </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <ul class="nav navbar-nav" id="nav">
+                <li id="index"><a href="/"> <span class="glyphicon glyphicon-home"></span>&nbsp;首页</a></li>
+                <li id="blog"><a href="/blog"><span class="glyphicon glyphicon-file"></span>&nbsp;博客</a></li>
+                {volist name='super' id='slist'}
+                <li id="su_{$slist.sid}" class="dropdown" onclick="window.open('/blog/index/sn/{$slist.sid}','_self')">
+                    <a data-toggle="dropdown" id="dLabel" data-target="#" role="button"
+                       href=""
+                       aria-haspopup="true" aria-expanded="false">
+                        &nbsp;{$slist.super_name}<span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu menus" aria-labelledby="dLabel">
+                        {volist name='columns' id='clist'}
+                        {if condition="$slist.super_name eq $clist.super_name"}
+                        <li><a href="/blog/index/cn/{$clist.cid}" target="_self">{$clist.col_name}</a></li>
+                        {/if}
+                        {/volist}
+                    </ul>
+                </li>
+                {/volist}
+            </ul>
+            <form action="" class="navbar-form navbar-right ">
+                <div class="login-status navbar-left " style="margin-right: 60px">
+                    {if condition="$Think.Session.status eq 1"}
+                    <div class="text-center dropdown-toggle" data-toggle="dropdown" id="dropdown2">
+                        <img class="glyphicon-user glyphicon"
+                             style="display: block;width: 30px;height:30px;line-height: 30px;border-radius: 50%;background-color: #e1e1e1;border: 0.5px solid wheat"
+                             src="{$icon|default='/static/profile/icon/default.jpg'}"/>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li><a href="/admin">设置</a></li>
+
+                        <li><a href="/user/login?logout=true">登出</a></li>
+                    </ul>
+
+                    {else/}
+
+
+                    <div class="no_login ">
+                        <div class="circular text-center dropdown-toggle" data-toggle="dropdown"
+                             style="display: inline-block;width: 30px;height:30px;line-height: 30px;border-radius: 50%;background-color: #e1e1e1;">
+                            <span class="glyphicon-user glyphicon"></span></div>
+                        <div class="text-center"
+                             style="float: right;height: 30px;margin-left:10px;line-height: 30px;color: white">
+                            <a id="login" style="cursor: pointer;">登录</a> &nbsp;|&nbsp; <a id="reg" style="cursor: pointer;">注册</a>
+                        </div>
+
+                    </div>
+                    {/if}
+
+                </div>
+
+
+                <div class="navbar-right search" style="margin-right: 20px" id="dropdown3">
+                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="search"><span
+                            class="glyphicon glyphicon-search"></span></a>
+
+                    <ul class="dropdown-menu" style="margin-right: 20px">
+                        <li>
+                            <div class="input-group input-group-md">
+                                <input type="text" name="kw" class="form-control">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit" formmethod="get"
+                                            formaction="/blog/search">搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<!--登录-->
+<div class="modal fade" id="myModalL" tabindex="-1">
+    <!-- 窗口声明 -->
+    <div class="modal-dialog modal-sm">
+        <!-- 内容声明 -->
+        <form id="LoginForm" method="post" class="form-horizontal" action="/user/login">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <h4 class="modal-title">会员登陆</h4>
+                </div>
+                <div class="modal-body login">
+                    <div class="container-fluid ">
+                        <div class="row">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="uname" id="userL" placeholder="用户名">
+                            </div>
+                            <div class="form-group">
+
+                                <input type="password" class="form-control" name="pwd" id="pwdL" placeholder="密码">
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input name="autopass" value="autopass" type="checkbox"> 记住密码
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default register" id="login_reg">注册</button>
+                    <button class="btn btn-primary logining" type="submit">登录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--注册-->
+<div class="modal fade" id="myModalR" tabindex="-1">
+    <!-- 窗口声明 -->
+    <div class="modal-dialog modal-md">
+        <!-- 内容声明 -->
+        <form id="defaultForm" method="post" class="form-horizontal" action="/user/register">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <h4 class="modal-title">会员注册</h4>
+                </div>
+                <div class="modal-body reg">
+                    <div class="container-fluid ">
+                        <div class="row">
+                            <div class="form-group">
+
+                                <input type="text" class="form-control" id="userR" name="uname" placeholder="用户名">
+                            </div>
+                            <div class="form-group">
+                                <label style="margin-right: 20px">性别:</label>
+
+                                    <div class="radio " >
+                                        <label>
+                                            <input type="radio" name="sex" value="男"/> 男
+                                        </label>
+                                        <label style="margin-left: 20px">
+                                            <input type="radio" name="sex" value="女"/> 女
+                                        </label>
+                                    </div>
+
+
+                            </div>
+                            <br>
+                            <div class="form-group">
+
+                                <input type="password" class="form-control" id="pwd1R" name="pwd" placeholder="密码">
+                            </div>
+                            <div class="form-group">
+
+                                <input type="password" class="form-control" id="pwd2R" name="confirmPassword"
+                                       placeholder="确认密码">
+                            </div>
+                            <div class="form-group">
+
+                                <input type="text" name="mail" class="form-control" id="email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="date" class="form-control" name="birth" placeholder="出生日期"/>
+
+                            </div>
+
+
+
+                               <div class=" form-group">
+                                   <div class="radio ">
+                                       <label>
+                                           <input type="radio" name="check" id="checkbox" value="already"> 我已阅读协议
+                                       </label>
+                                   </div>
+
+
+                               </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding-right: 150px">
+                    <button class="btn btn-warning" type="button" id="resetBtn">重置</button>
+                    <button class="btn btn-primary register" type="submit" id="register">注册</button>
+                    <button class="btn btn-default logining" id="reg_login">登录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script src="__STYLE__/index/js/jquery-2.js"></script>
+<script src="__STYLE__/index/js/bootstrap.js"></script>
+<script src="__STYLE__/index/js/bootstrapValidator.js"></script>
+<script src="__STYLE__/index/js/validate.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $("#{$active|default='null'}").addClass('active');
+        $("#check").popover();
+        if($('#checkbox').is(':checked')) {
+
+        }
+
+        dropdownOpen();
+        //导航条菜单
+//        登录注册
+        $("#LoginForm").keydown(function(e){
+            var e = e || event,
+                keycode = e.which || e.keyCode;
+            if (keycode==13) {
+                $(".logining").trigger("click");
+            }
+        });
+        $("#defaultForm").keydown(function(e){
+            var e = e || event,
+                keycode = e.which || e.keyCode;
+            if (keycode==13) {
+                $(".register").trigger("click");
+            }
+        });
+        $("#tab1 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+
+        $("#tab2 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+
+        $("#tab3 a").mousemove(function (e) {
+            $(this).tab('show');
+        });
+        function dropdownOpen() {
+
+            var $dropdown = $('.navbar-nav .dropdown ');
+
+            $dropdown.mouseover(function () {
+                $dropdown.off('click.bs.dropdown.data-api');
+                $(this).addClass('open');
+            }).mouseout(function () {
+                $(this).removeClass('open');
+                $dropdown.on('click.bs.dropdown.data-api');
+            });
+
+        }
+        $("#p-close").click(function () {
+            $("#passage").css("display", "none");
+            $("#p-col").removeClass("col-xs-12 col-md-8");
+            $(".display").css("display","block");
+        });
+        $("#display").click(function () {
+            $("#passage").css("display", "block");
+            $("#p-col").addClass("col-xs-12 col-md-8");
+            $(".display").css("display", "none");
+        });
+
+    });
+
+
+</script>
