@@ -1,0 +1,98 @@
+body{
+    background: url("../images/bg-yellow.png") repeat;
+}
+.page{
+
+    -webkit-box-shadow:0 0 10px rgba(88, 88, 88, 0.8);
+    -moz-box-shadow:0 0 10px rgba(88, 88, 88, 0.8);
+    box-shadow:0 0 10px rgba(88, 88, 88, 0.8);
+     background: white;
+}
+.breadcrumb{
+   background-color: #d5d5d5;
+}
+.container span{
+    font-size: 20px;
+}
+ .container p{
+    text-indent: 2em;
+    line-height: 1.75em;
+    font-size: 18px;
+    padding: 10px;
+}
+.content_right{
+    width:300px;
+    height: 2000px;
+}
+.introduction{
+    width: 300px;
+    height: 300px;
+     margin-left: 30px;
+    text-align: center;
+     background: rgba(255, 255, 255, 0.4);
+    -webkit-box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+    -moz-box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+    box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+}
+.introduction img{
+    width: 120px;
+    height: 120px;
+    margin-top: 35px;
+}
+
+
+ .labels{
+    width: 300px;
+    height: 300px;
+     margin-left: 30px;
+     background: rgba(255, 255, 255, 0.4);
+    -webkit-box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+    -moz-box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+    box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+}
+
+.labels h2{
+    margin: 15px;
+}
+.labels span{
+    background-color: #FFB270;
+    width: 40px;
+    height: 30px;
+    padding: 2px;
+    margin-right: 10px;
+    margin-left: 5px;
+    line-height: 30px;
+}
+.on_look{
+    width: 300px;
+    height: 450px;
+    margin-left: 30px;
+     background: rgba(255, 255, 255, 0.4);
+    -webkit-box-shadow:0 0 8px rgba(114, 114, 114, 0.5);
+    -moz-box-shadow:0 0 8px rgba(114, 114, 114, 0.5);
+    box-shadow:0 0 8px rgba(114, 114, 114, 0.5);
+}
+.on_look h2{
+    margin: 25px 15px 15px 15px;
+}
+.on_look p{
+    text-indent: 0em;
+    padding: 3px;
+}
+.on_look .hot{
+    width: 300px;
+    height: 65px;
+}
+.hot:hover{
+    background-color: rgb(230, 230, 230);
+}
+.hot:hover a{
+    color: rgb(70,168,254);
+}
+.on_look p a{
+    color: #333333;
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+}
+.input-group input{
+    display: block;
+}

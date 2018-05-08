@@ -1,0 +1,262 @@
+/*搜索*/
+.search .dropdown-menu{
+    background-color: transparent;
+    border: 0px;
+    padding: 0px;
+}
+.menu_search{
+    width: 200px;
+    margin-top: 20px;
+    border: 0px;
+    box-shadow: none;
+    float: right;
+}
+/*表单*/
+.login{
+    padding-right: 30px;
+    padding-left: 30px;
+}
+.reg{
+    padding-right: 100px;
+    padding-left: 100px;
+}
+.modal-body label{
+    float: left;
+}
+
+/*tab*/
+
+.tab{
+    width: 300px;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+.tab .nav-tabs {
+    border-bottom: 0 none;
+    background: #eaeaea;
+}
+
+.tab .nav-tabs li a {
+    background: transparent;
+    border-radius: 0;
+    font-size: 16px;
+    border: none;
+    color: #333;
+    padding: 12px 22px;
+}
+
+.tab .nav-tabs li.active a, .tab .nav-tabs li.active a i {
+    border: 0 none;
+    background: #e67e22;
+    color: #fff;
+}
+
+.tab .nav-tabs li.active a:after {
+    content: "";
+    position: absolute;
+    left: 45%;
+    bottom: -14px;
+    border: 7px solid transparent;
+    border-top: 7px solid #e67e22;
+}
+
+.tab .tab-content {
+    padding: 5px;
+    color: #5a5c5d;
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 5px;
+    border-bottom: 5px solid #e67e22;
+}
+.tab-content p{
+    font-size: 16px;
+    line-height: 16px;
+}
+.tab_bg{
+    background-color: #fbfbfb;
+}
+
+.accordion-heading{
+    border: solid 2px #333;
+    color: white;
+}
+.accordion-group{
+    margin-top: 5px;
+    font-size: 18px;
+    line-height: 18px;
+}
+.tabMove ul {
+    width: 300px;
+    height: 400px;
+    float: left;
+}
+.tabMove ul:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.tabMove ul li {
+    float: left;
+    width: 235px;
+    height: 320px;
+    margin: 0px 10px;
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    color: #fff;
+    transition: all .35s;
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+.tabMove ul li:after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 500px;
+    position: absolute;
+    top: -300px;
+    left: -500px;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotateZ(45deg);
+    transition: all 0.7s;
+}
+
+.tabMove ul li:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 0px 10px white;
+}
+
+.tabMove ul li:hover:after {
+    left: 550px;
+}
+
+.tabMove ul li .icon {
+    width: 50px;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.tabMove ul li .icon img {
+    width: 100%;
+    display: block;
+}
+
+.tabMove ul li h4 {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #ffa800;
+    margin-bottom: 20px;
+}
+
+.tabMove ul li p {
+    line-height: 32px;
+    font-size: 15px;
+}
+
+.tabBtn ul {
+    width: 150px;
+}
+
+.tabBtn li {
+    display: inline-block;
+    background: #fff;
+    width: 20px;
+    height: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/*板块*/
+
+.introduction{
+    width: 300px;
+    height: 300px;
+    margin-left: 30px;
+    text-align: center;
+    background:#fbfbfb;
+    -webkit-box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+    -moz-box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+    box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+}
+.introduction img{
+    width: 120px;
+    height: 120px;
+    margin-top:15px;
+}
+.labels{
+    width: 300px;
+
+    padding: 8px;
+    max-height:430px;
+    overflow: hidden;
+    margin-left: 30px;
+    margin-top: 20px;
+    background: #fbfbfb;
+    -webkit-box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+    -moz-box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+    box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+}
+.labels span{
+  font-size: 14px;
+    margin: 4px;
+}
+.introduce{
+    width: 300px;
+    margin-left: 30px;
+    margin-top: 30px;
+    background: #fbfbfb;
+    -webkit-box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+    -moz-box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+    box-shadow:0 0 8px rgba(114, 114, 114, 0.8);
+}
+.introduce p{
+
+    font-size: 16px;
+}
+.tabBtn li.active {
+    width: 35px;
+    background: #ffa800;
+}
+
+@media (max-width:500px ){
+    .search{
+        margin-top: 1rem;
+    }
+    .introduce p{
+        margin-top: 1.5rem;
+        font-size: 1.8rem;
+    }
+    .tab .nav-tabs, .tab .nav-tabs li {
+        width: 100%;
+        background: transparent;
+    }
+
+    .tab .nav-tabs li.active a {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .tab .nav-tabs li:first-child a {
+        border-bottom-left-radius: 0;
+    }
+
+    .tab .nav-tabs li a {
+        margin-bottom: 10px;
+        border: 1px solid lightgray;
+    }
+
+    .tab .nav-tabs li.active a:after {
+        border: none;
+    }
+    .menu_search{
+        width: 200px;
+        margin-top: 0px;
+        border: 0px;
+        box-shadow: none;
+        float: right;
+    }
+    .labels{
+        max-height: 30.5rem;
+    }
+
+}

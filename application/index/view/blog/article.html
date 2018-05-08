@@ -300,19 +300,16 @@
                             + "\</div\>"
                         );
                     });
-                    $('.replys').click(function () {
+                }
+            };
+       
+        });
+        $('.replys').click(function () {
                         $('#myModalreply').modal('show');
                         $('.replyer').text($(this).siblings('.nick_name').text());
                         $('#from_level').attr('value',$(this).siblings('.pull-right').text().replace(/[\#\*\/]/g,""));
                         $('#uid').attr('value',$(this).siblings('.from').text().replace(/[\#\*\/]/g,""));
                     });
-
-                }
-            };
-       
-        });
-
-
     });
 </script>
 </body>

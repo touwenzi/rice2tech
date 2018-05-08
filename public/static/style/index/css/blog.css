@@ -1,0 +1,60 @@
+body{
+    background: url("../images/school.png") repeat;
+}
+.content{
+    width: 100%;
+}
+.new{
+    margin-top: 20px;
+    -webkit-box-shadow:0 0 10px rgba(175, 175, 175, 0.8);
+    -moz-box-shadow:0 0 10px rgba(175, 175, 175, 0.8);
+    box-shadow:0 0 10px rgba(175, 175, 175, 0.8);
+    background-color: #fbfbfb;
+    border-radius: 10px;
+}
+.new p{
+    font-size: 16px;
+    line-height: 18px;
+    padding-right: 12px;
+}
+.new .lb{
+    margin: 0px 4px 0 3px;
+    font-size: 18px;
+}
+.new img{
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    background-color: #1b6d85;
+}
+
+@media (max-width:600px ){
+
+
+    .new p{
+        display: none;
+
+    }
+    .new h3{
+        font-size:1.8rem;
+    }
+    .new .lb{
+        margin: 0 0.4rem 0 0.3rem;
+
+    }
+    .new img{
+        width: 10rem;
+        height: 10rem;
+        margin: 0.5rem;
+        background-color: #1b6d85;
+
+    }
+    .login{
+        padding-right: 3rem;
+        padding-left: 3rem;
+    }
+    .reg{
+        padding-right: 5rem;
+        padding-left: 5rem;
+    }
+}
